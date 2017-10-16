@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ "$1" = "--only-source" ] && [ "$2" = "showsrc" ] && [ "$3" = "xorg-server" ]; then
+	cat <<'EOT'
+Package: xorg-server
+Binary: xserver-xorg-core, xserver-xorg-core-udeb, xserver-xorg-dev, xdmx, xdmx-tools, xnest, xvfb, xserver-xephyr, xserver-common, xorg-server-source, xwayland, xserver-xorg-legacy
+Version: 2:1.19.3-2
+
+Package: xorg-server
+Binary: xserver-xorg-core, xserver-xorg-core-udeb, xserver-xorg-dev, xdmx, xdmx-tools, xnest, xvfb, xserver-xephyr, xserver-common, xorg-server-source, xwayland, xserver-xorg-legacy
+Version: 2:1.19.1-4
+
+EOT
+else
+	echo "N: No packages found" >&2
+	echo "$@" >&2
+	exit 1
+fi

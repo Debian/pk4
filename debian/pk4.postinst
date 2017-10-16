@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	systemctl start --no-block pk4-generate-index.service >/dev/null || true
+fi
+
+#DEBHELPER#

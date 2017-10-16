@@ -1,0 +1,37 @@
+.de Vb \" Begin verbatim text
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve \" End verbatim text
+.ft R
+.fi
+..
+
+.TH pk4-generate-index 1 "OCTOBER 2017" Linux "User Manuals"
+
+.SH NAME
+pk4-generate-index \- (Re-)generate index files for pk4
+
+.SH SYNOPSIS
+.B pk4-generate-index
+.RB [ \fBoptions\fR ]
+
+.SH DESCRIPTION
+.B pk4-generate-index
+derives various index files from APT sources lists, configuration and packages
+files.
+.PP
+This program is automatically started via the \fBpk4-generate-index.service\fR
+(after APT updates) and \fBpk4-generate-index.timer\fR (1m after the last dpkg
+invocation) systemd units, so you should never need to manually run it.
+.SH OPTIONS
+.TP
+.B \-index_dir \fIstring\fR
+Directory to store the pk4 index files in (default \fI/var/cache/pk4\fR).
+.SH SEE ALSO
+.TP
+.IR pk4(1)
+avail the Debian source package producing the specified package
+.SH AUTHOR
+Michael Stapelberg <stapelberg at debian.org>

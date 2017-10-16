@@ -1,0 +1,7 @@
+apt.conf.d/50pk4.conf /etc/apt/apt.conf.d/
+bash-completion/pk4  /usr/share/bash-completion/completions/
+zsh-vendor-completions/_pk4 /usr/share/zsh/vendor-completions/
+pk4-generate-index.service /lib/systemd/system/
+pk4-generate-index.timer /lib/systemd/system/
+dpkg.cfg.d/pk4 /etc/dpkg/dpkg.cfg.d/
+hooks-available/after-download /usr/share/pk4/hooks-available/

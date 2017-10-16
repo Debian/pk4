@@ -1,0 +1,3 @@
+# Verify LoadState to avoid error messages from calling systemctl restart on an
+# already-uninstalled pk4-generate-index.timer.
+post-invoke="if [ "$(/bin/systemctl show -p LoadState --value pk4-generate-index.timer)" = "loaded" ]; then /bin/systemctl restart pk4-generate-index.timer || true; fi"

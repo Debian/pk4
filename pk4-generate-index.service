@@ -1,0 +1,15 @@
+[Unit]
+Description=pk4-generate-index
+Documentation=man:pk4-generate-index
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pk4-generate-index
+# Avoid hogging system resources, pk4 index updates are far from critical:
+Nice=19
+IOSchedulingClass=idle
+# Deny any network access:
+IPAddressDeny=any
+# Only allow writes to /var/cache/pk4:
+ProtectSystem=strict
+ReadWritePaths=/var/cache/pk4

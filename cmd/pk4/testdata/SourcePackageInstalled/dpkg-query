@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ "$1" = "--show" ]; then
+  shift
+  while (( "$#" )); do
+     case "$1" in
+        xserver-xephyr)
+           echo -e "xserver-xephyr\t2:1.19.3-2"
+           ;;
+        xserver-xorg-legacy)
+           echo "xserver-xorg-legacy"
+           ;;
+        *)
+	   echo "dpkg-query: no packages found matching $1" >&2
+	   ;;
+     esac
+     shift
+  done
+fi

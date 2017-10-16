@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ "$1" = "--show" ] && [ "$2" = "vim-gtk" ]; then
+	cat <<'EOT'
+vim	2:8.0.0197-5
+EOT
+else
+	echo "dpkg-query: no packages found" >&2
+	echo "$@" >&2
+	exit 1
+fi

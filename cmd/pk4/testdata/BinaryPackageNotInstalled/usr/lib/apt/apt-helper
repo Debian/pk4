@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ "$1" = "cat-file" ] && [ "$2" = "/var/lib/apt/lists/deb.debian.org_debian_dists_unstable_main_binary-amd64_Packages.gz" ]; then
+	cat <<'EOT'
+Package: fluxbox
+Source: fluxbox (1.3.5-2)
+Version: 1.3.5-2+b2
+EOT
+else
+	echo "E: invalid operation" >&2
+	echo "$@" >&2
+	exit 1
+fi

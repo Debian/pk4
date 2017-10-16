@@ -1,0 +1,8 @@
+#compdef pk4
+
+_pk4() {
+    reply=(${(f)"$(=pk4 -complete ${words[@]:1})"})
+    compadd -a "$@" reply
+}
+
+_pk4

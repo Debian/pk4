@@ -1,0 +1,15 @@
+#!/bin/bash
+res=0
+if [ "$1" = "--show" ]; then
+  shift
+  while (( "$#" )); do
+     case "$1" in
+        *)
+	   echo "dpkg-query: no packages found matching $1" >&2
+	   res=1
+	   ;;
+     esac
+     shift
+  done
+fi
+exit $res

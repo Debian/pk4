@@ -1,0 +1,68 @@
+.de Vb \" Begin verbatim text
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve \" End verbatim text
+.ft R
+.fi
+..
+
+.TH pk4-replace 1 "OCTOBER 2017" Linux "User Manuals"
+
+.SH NAME
+pk4-replace \- build sources and replace currently installed packages
+
+.SH SYNOPSIS
+.B pk4-replace
+.RB [ \fBoptions\fR ]
+
+.SH DESCRIPTION
+.B pk4-replace
+builds the sources in the current directory using sbuild, then replaces the
+subset of currently installed binary packages with the newly built packages.
+.SH OPTIONS
+.TP
+.B \-dry_run
+Print the build command and exit
+.SH EXAMPLES
+.TP
+.BR
+.nf
+.RS
+# Fetch the i3 source, apply a bugfix, rebuild and replace installed packages:
+pk4 i3
+patch -p1 < /tmp/myfix.patch
+pk4-replace
+.RE
+.fi
+.SH CONFIGURATION FILE
+The following attributes can be configured in \fI~/.config/pk4/pk4.deb822\fR:
+.TP
+.B Build-Command \fIstrings\fR
+The command to use for building the sources in the current directory. Must write
+the path to the resulting .changes file to the pipe \fB/proc/self/fd/3\fR when
+done.
+.PP
+Example (default):
+.PP
+.nf
+.RS
+Build-Command:
+  sbuild
+  --post-build-commands
+  echo %SBUILD_CHANGES > /proc/self/fd/3
+  -A
+  --no-clean-source
+  --dpkg-source-opt=--auto-commit
+.RE
+.fi
+.SH SEE ALSO
+.TP
+.IR pk4(1)
+avail the Debian source package producing the specified package
+.TP
+.IR sbuild(1)
+build debian packages from source
+.SH AUTHOR
+Michael Stapelberg <stapelberg at debian.org>

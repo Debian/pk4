@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ "$1" = "-x" ] && [ "$2" = "hello_2.10-1.dsc" ]; then
+  exit 0
+fi
+echo "dpkg-source: not called on expected dsc" >&2
+echo "$@" >&2
+exit 1
+

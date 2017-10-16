@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+# vim:ts=8:sw=8:noexpandtab
+
+# for verbose builds
+export V:=1
+
+# TODO(stapelberg): re-enable once dh-golang respects the executable flag and can copy symlinks
+#export DH_GOLANG_INSTALL_EXTRA := cmd/pk4/testdata
+override_dh_auto_test:
+
+# We need a manual systemctl start call because deb-systemd-invoke does not
+# touch static units. See debian/pk4.postinst.
+override_dh_systemd_start:
+
+override_dh_auto_install:
+	dh_auto_install -- --no-source
+
+%:
+	dh $@ --buildsystem=golang --with=golang

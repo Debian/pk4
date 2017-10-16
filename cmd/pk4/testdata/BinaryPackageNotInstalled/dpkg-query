@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "dpkg-query: no packages found" >&2
+echo "$@" >&2
+exit 1

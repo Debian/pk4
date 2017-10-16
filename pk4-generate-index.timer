@@ -1,0 +1,6 @@
+[Unit]
+Description=pk4-generate-index (deferred)
+Documentation=man:pk4-generate-index
+
+[Timer]
+OnActiveSec=1m

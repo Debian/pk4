@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ "$2" =~ "vim.gtk" ]]; then
+	cat <<'EOT'
+vim-gtk: vim.gtk
+EOT
+else
+	echo "dpkg: no path found matching pattern" >&2
+	echo "$@" >&2
+	exit 1
+fi

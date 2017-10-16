@@ -1,0 +1,134 @@
+.de Vb \" Begin verbatim text
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve \" End verbatim text
+.ft R
+.fi
+..
+
+.TH pk4 1 "OCTOBER 2017" Linux "User Manuals"
+
+.SH NAME
+pk4 \- avail the Debian source package producing the specified package
+
+.SH SYNOPSIS
+.B pk4
+.RB [ \fBoptions\fR ]
+\fIpackage\fR...
+
+.SH DESCRIPTION
+.B pk4
+resolves the specified argument(s) as either:
+.TP
+.BR
+1. the name of a Debian binary package, and selects its Debian source package.
+.TP
+.BR
+2. the name of a Debian source package, and selects it.
+.TP
+.BR
+3. or a file path, and selects the Debian source package of the owning package.
+.PP
+The source package version is either the installed version (if any) or the
+installation candidate, as per \fIapt-cache policy\fR.
+.PP
+Then, pk4 downloads the entire selected source package (every file referenced
+by — and including — its .dsc file) and prints the output directory path.
+.SH OPTIONS
+.TP
+.B \-allow_unauthenticated
+Whether to allow unauthenticated source packages, i.e. disable signature
+checking.
+.TP
+.B \-bin
+Restrict search to binary packages only.
+.TP
+.B \-complete
+Whether to return shell completions. Should usually be set by shell completion
+functions only.
+.TP
+.B \-dest \fIstring\fR
+Directory in which to store source packages (default \fI~/.cache/pk4\fR).
+.TP
+.B \-file
+Interpret the argument as a file name and operate on the package providing the
+file.
+.TP
+.B \-resolve_only
+Resolve the provided arguments to source package and source package version,
+then print them to stdout in %s\\t%s\\n format and exit.
+.TP
+.B \-shell \fIstring\fR
+Which shell to start in the output directory after downloading the source
+(default \fI$SHELL\fR)
+.TP
+.B \-src
+Restrict search to source packages only.
+.TP
+.B \-verbose
+Whether to print messages to stderr.
+.TP
+.B \-version \fIstring\fR
+Use the specified source package version (default: installed package version, or
+latest known if not installed).
+.SH EXAMPLES
+.TP
+.BR
+.nf
+.RS
+# Avail the current Linux kernel sources:
+pk4 -src linux
+.PP
+# Avail the sources which produced Debian binary package libbz2-1.0
+pk4 libbz2-1.0
+.PP
+# Avail the sources of whichever package currently provides vi:
+pk4 -file $(which vi)
+.PP
+# Fetch the i3 source, apply a bugfix, rebuild and replace installed packages:
+pk4 i3
+patch -p1 < /tmp/myfix.patch
+pk4-replace
+.PP
+# Avail all debhelper build system implementations:
+pk4 -allow_unauthenticated $(grep '^dh-*' /var/cache/pk4/completion.both.txt)
+# Grep through their sources:
+grep -r option ~/.cache/pk4/dh-*
+.RE
+.fi
+.SH CONFIGURATION FILE
+The following attributes can be configured in \fI~/.config/pk4/pk4.deb822\fR:
+.TP
+.B Disk-Usage-Limit \fIbytes\fR
+Example:
+.PP
+.nf
+.RS
+Disk-Usage-Limit: 2GiB
+.RE
+.fi
+.SH HOOKS
+The following hooks can be configured:
+.TP
+.B after-download
+after-download are run after the package was successfully downloaded. Examples:
+.PP
+.nf
+.RS
+# Automatically create a git repository for each package:
+mkdir -p ~/.config/pk4/hooks-enabled/after-download/
+ln -s /usr/share/pk4/hooks-available/after-download/git-init \\
+~/.config/pk4/hooks-enabled/after-download/
+.RE
+.fi
+.SH SEE ALSO
+.TP
+.IR pk4-generate-index(1)
+(Re-)generate index files for pk4
+.TP
+.IR pk4-replace(1)
+build sources and replace currently installed packages
+.SH AUTHOR
+Michael Stapelberg <stapelberg at debian.org>

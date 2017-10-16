@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git init --quiet
+git add .
+git commit -a -m "Initial commit" --quiet

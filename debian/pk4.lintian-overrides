@@ -1,0 +1,2 @@
+# We need a manual systemctl call, see debian/pk4.postinst.
+pk4: maintainer-script-calls-systemctl

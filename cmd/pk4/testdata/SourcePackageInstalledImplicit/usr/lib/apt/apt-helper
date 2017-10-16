@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ "$1" = "cat-file" ] && [ "$2" = "/var/lib/apt/lists/deb.debian.org_debian_dists_unstable_main_binary-amd64_Packages.gz" ]; then
+	cat <<'EOT'
+Package: xdmx-tools
+Source: xorg-server
+Version: 2:1.19.3-2
+EOT
+else
+	echo "E: invalid operation" >&2
+	echo "$@" >&2
+	exit 1
+fi
