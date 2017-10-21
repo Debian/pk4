@@ -3,4 +3,11 @@
 ## TODO
 
  * link to manpage from here once the manpage is available on manpages.d.o
- * rebuild a package using sbuild, then replace locally installed packages with the result
+
+## Terminal screencast
+
+Here is a terminal screencast of the tool in action, availing the sources of i3,
+applying a patch, rebuilding the package and replacing the installed binary
+packages:
+
+[![asciicast](https://asciinema.org/a/TgYn2wkABiob14WKb2UefNl9f.png)](https://asciinema.org/a/TgYn2wkABiob14WKb2UefNl9f)
