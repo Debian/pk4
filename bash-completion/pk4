@@ -4,6 +4,4 @@ pk4complete() {
     readarray COMPREPLY < <($(which pk4) -complete "${COMP_WORDS[@]:1}")
 }
 
-# pk4 --src "foo bar"
-
 complete -F pk4complete pk4
