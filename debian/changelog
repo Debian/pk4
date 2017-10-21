@@ -1,3 +1,10 @@
+pk4 (2) unstable; urgency=medium
+
+  * bash-completion: remove cruft
+  * Add missing build-dep on golang-golang-x-sync-dev (Closes: #879456)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Sat, 21 Oct 2017 20:15:48 +0200
+
 pk4 (1) unstable; urgency=medium
 
   * Initial release
