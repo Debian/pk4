@@ -5,7 +5,8 @@ Maintainer: Michael Stapelberg <stapelberg@debian.org>
 Build-Depends: debhelper (>= 10),
                dh-golang,
                golang-go | golang-any,
-	       golang-pault-go-debian-dev
+	       golang-pault-go-debian-dev,
+	       golang-golang-x-sync-dev
 Standards-Version: 4.1.1
 Vcs-Git: https://github.com/Debian/pk4
 Vcs-Browser: https://github.com/Debian/pk4
