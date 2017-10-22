@@ -1,8 +1,8 @@
 # pk4 — avail the Debian source package producing the specified package
 
-## TODO
-
- * link to manpage from here once the manpage is available on manpages.d.o
+Please see [the pk4(1)
+manpage](https://manpages.debian.org/unstable/pk4/pk4.1.en.html) for
+documentation.
 
 ## Terminal screencast
 
