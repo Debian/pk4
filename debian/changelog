@@ -1,3 +1,11 @@
+pk4 (3) unstable; urgency=medium
+
+  * Depend on systemd-sysv until hooks work without it (#879570)
+  * Recommend sbuild for pk4-replace
+  * Add the unpack hook. See pk4.1 for details. Closes: #879486
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Mon, 23 Oct 2017 21:59:20 +0200
+
 pk4 (2) unstable; urgency=medium
 
   * bash-completion: remove cruft
