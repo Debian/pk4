@@ -19,6 +19,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 devscripts,
 	 dpkg-dev,
 	 systemd-sysv
+Recommends: sbuild
 Built-Using: ${misc:Built-Using}
 Description: avail the Debian source package producing the specified package
  pk4 resolves the specified argument(s) as either:
