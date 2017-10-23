@@ -7,22 +7,22 @@ import (
 	"path/filepath"
 )
 
-func (i *invocation) runHooks(hookDir, wd string) error {
+func (i *invocation) runHooks(hookDir, wd string, args []string) (found bool, _ error) {
 	fis, err := ioutil.ReadDir(hookDir)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil
+			return false, nil
 		}
-		return err
+		return false, err
 	}
 	for _, fi := range fis {
-		hook := exec.Command(filepath.Join(hookDir, fi.Name()))
+		hook := exec.Command(filepath.Join(hookDir, fi.Name()), args...)
 		hook.Dir = wd
 		hook.Stderr = os.Stderr
 		hook.Stdout = os.Stderr
 		if err := hook.Run(); err != nil {
-			return err
+			return true, err
 		}
 	}
-	return nil
+	return len(fis) > 0, nil
 }

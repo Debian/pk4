@@ -198,6 +198,13 @@ func (i *invocation) downloadDSCAndUnpack(dest, srcpkg, srcversion, snapshotBase
 		return err
 	}
 
+	hooksFound, err := i.runHooks(filepath.Join(i.configDir, "hooks-enabled", "unpack"), filepath.Dir(dest), []string{filepath.Base(fpath), dest})
+	if hooksFound {
+		return err
+	}
+
+	// no unpack hooks? fall back to dpkg-source -x
+
 	name, err := i.lookPath("dpkg-source")
 	if err != nil {
 		return err
@@ -305,7 +312,7 @@ func (i *invocation) download(srcpkg, srcversion string) (outputDir string, _ er
 		return "", err
 	}
 
-	if err := i.runHooks(filepath.Join(i.configDir, "hooks-enabled", "after-download"), outputDir); err != nil {
+	if _, err := i.runHooks(filepath.Join(i.configDir, "hooks-enabled", "after-download"), outputDir, nil); err != nil {
 		log.Printf("hook failure: %v", err)
 		// hooks are best-effort, don’t fail
 	}

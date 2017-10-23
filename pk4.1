@@ -113,7 +113,7 @@ Disk-Usage-Limit: 2GiB
 The following hooks can be configured:
 .TP
 .B after-download
-after-download are run after the package was successfully downloaded. Examples:
+after-download hooks are run after the package was successfully downloaded. Examples:
 .PP
 .nf
 .RS
@@ -121,6 +121,20 @@ after-download are run after the package was successfully downloaded. Examples:
 mkdir -p ~/.config/pk4/hooks-enabled/after-download/
 ln -s /usr/share/pk4/hooks-available/after-download/git-init \\
 ~/.config/pk4/hooks-enabled/after-download/
+.RE
+.fi
+.TP
+.B unpack
+unpack hooks replace the unpack phase: as soon as one or more unpack hooks are
+found, pk4 will run them instead of running dpkg-source -x. Examples:
+.PP
+.nf
+.RS
+# Unpack source into a new git-buildpackage repository:
+apt install git-buildpackage
+mkdir -p ~/.config/pk4/hooks-enabled/unpack/
+ln -s /usr/share/pk4/hooks-available/unpack/gbp \\
+~/.config/pk4/hooks-enabled/unpack/
 .RE
 .fi
 .SH SEE ALSO
