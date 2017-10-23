@@ -17,7 +17,8 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
          debian-keyring,
 	 devscripts,
-	 dpkg-dev
+	 dpkg-dev,
+	 systemd-sysv
 Built-Using: ${misc:Built-Using}
 Description: avail the Debian source package producing the specified package
  pk4 resolves the specified argument(s) as either:
