@@ -57,6 +57,19 @@ Build-Command:
   --dpkg-source-opt=--auto-commit
 .RE
 .fi
+.PP
+Example (illustrating how one line is one argv element):
+.PP
+.nf
+.RS
+Build-Command:
+  sbuild
+  --post-build-commands
+  echo %SBUILD_CHANGES > /proc/self/fd/3
+  -d
+  stretch
+.RE
+.fi
 .SH SEE ALSO
 .TP
 .IR pk4(1)
