@@ -13,3 +13,5 @@ IPAddressDeny=any
 # Only allow writes to /var/cache/pk4:
 ProtectSystem=strict
 ReadWritePaths=/var/cache/pk4
+# Results in a writeable, private /tmp (required by apt under some circumstances).
+PrivateTmp=yes
