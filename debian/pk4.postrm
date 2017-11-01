@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	remove)
+		# APT and dpkg hooks are still in place, but package files are
+		# not. Trigger a daemon-reload to make systemd realize our unit
+		# files have vanished.
+		if [ -d /run/systemd/system ]; then
+			systemctl --system daemon-reload >/dev/null || true
+		fi
+	;;
+esac
+
+#DEBHELPER#
