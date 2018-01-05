@@ -24,6 +24,7 @@ var errDryRun = errors.New("dry run requested")
 type invocation struct {
 	configDir    string
 	buildCommand []string
+	dist         string
 
 	dryRun bool
 }
@@ -34,6 +35,9 @@ func (i *invocation) build() (changesFile string, _ error) {
 		return "", err
 	}
 	sbuild := exec.Command(i.buildCommand[0], i.buildCommand[1:]...)
+	if i.dist != "" {
+		sbuild.Args = append(sbuild.Args, "-d", i.dist)
+	}
 	log.Printf("Building package using %q", sbuild.Args)
 	if i.dryRun {
 		return "", errDryRun
@@ -129,6 +133,7 @@ func (i *invocation) readConfig(configPath string) error {
 	}
 	var config struct {
 		BuildCommand []string `control:"Build-Command" delim:"\n" strip:"\n\r\t "`
+		Dist         string   `control:"Dist"`
 	}
 	if err := control.Unmarshal(&config, bytes.NewReader(b)); err != nil {
 		return err
@@ -136,6 +141,9 @@ func (i *invocation) readConfig(configPath string) error {
 	log.Printf("read config from %s: %+v", configPath, config)
 	if len(config.BuildCommand) > 0 {
 		i.buildCommand = config.BuildCommand
+	}
+	if config.Dist != "" {
+		i.dist = config.Dist
 	}
 	return nil
 }
@@ -168,6 +176,10 @@ func main() {
 	flag.BoolVar(&i.dryRun, "dry_run",
 		false,
 		"Print the build command and exit")
+
+	flag.StringVar(&i.dist, "dist",
+		"",
+		"Distribution for the package build. If non-empty, will be passed to sbuild -d")
 
 	i.configDir = resolveTilde("~/.config/pk4")
 	configPath := filepath.Join(i.configDir, "pk4.deb822")
