@@ -7,13 +7,16 @@ import (
 	"bytes"
 	"errors"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 
+	"pault.ag/go/debian/changelog"
 	"pault.ag/go/debian/control"
 )
 
@@ -42,6 +45,27 @@ func (i *invocation) build() (changesFile string, _ error) {
 	if i.dryRun {
 		return "", errDryRun
 	}
+	ts := time.Now().UTC().Format("2006-01-02T15:04:05Z") // like sbuild
+
+	latest, err := changelog.ParseFileOne("debian/changelog")
+	if err != nil {
+		return "", err
+	}
+	prefix := fmt.Sprintf("%s_%s", latest.Source, latest.Version)
+	stderr, err := os.Create("../" + prefix + "-" + ts + ".stderr")
+	if err != nil {
+		return "", err
+	}
+	defer stderr.Close()
+	sbuild.Stderr = stderr
+
+	stdout, err := os.Create("../" + prefix + "-" + ts + ".stdout")
+	if err != nil {
+		return "", err
+	}
+	defer stdout.Close()
+	sbuild.Stdout = stdout
+
 	sbuild.ExtraFiles = []*os.File{pw} // populates fd 3
 	if err := sbuild.Run(); err != nil {
 		return "", err
