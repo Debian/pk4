@@ -1,3 +1,15 @@
+pk4 (4) unstable; urgency=medium
+
+  * pk4-replace.1: add another example to illustrate how options are passed
+  * apt hook: check if unit is loaded before starting it (Thanks xeen)
+  * postrm: systemctl daemon-reload
+  * pk4-generate-index.service: add PrivateTmp=yes
+  * pk4-replace: only install currently installed packages
+  * pk4-replace: add -dist flag (and config option)
+  * pk4-replace: log build stdout and stderr to file (Closes: #879729)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Fri, 05 Jan 2018 09:35:29 +0100
+
 pk4 (3) unstable; urgency=medium
 
   * Depend on systemd-sysv until hooks work without it (#879570)
