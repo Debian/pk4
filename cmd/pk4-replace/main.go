@@ -60,7 +60,7 @@ func (i *invocation) packagesToReplace(changesFile string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	args := []string{"-f", "${Package}_\n", "--show"}
+	args := []string{"-f", "${db:Status-Status} ${Package}_\n", "--show"}
 	query := exec.Command("dpkg-query", append(args, changes.Binaries...)...)
 	out, err := query.Output()
 	if err != nil {
@@ -69,7 +69,12 @@ func (i *invocation) packagesToReplace(changesFile string) ([]string, error) {
 		}
 		// exec.ExitError is okay, dpkg-query still returns partial output.
 	}
-	prefixes := strings.Split(strings.TrimSpace(string(out)), "\n")
+	var prefixes []string
+	for _, line := range strings.Split(strings.TrimSpace(string(out)), "\n") {
+		if strings.HasPrefix(line, "installed ") {
+			prefixes = append(prefixes, strings.TrimPrefix(line, "installed "))
+		}
+	}
 
 	filenames := make([]string, 0, len(changes.Files))
 	// This approach is O(n²), but n is small.
