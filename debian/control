@@ -21,7 +21,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	 systemd-sysv
 Recommends: sbuild
 Built-Using: ${misc:Built-Using}
-Description: avail the Debian source package producing the specified package
+Description: make available the Debian source package producing the specified package
  pk4 resolves the specified argument(s) as either:
  .
  1. the name of a Debian binary package, and selects its Debian source package.
