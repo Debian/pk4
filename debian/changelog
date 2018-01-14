@@ -1,3 +1,9 @@
+pk4 (5) unstable; urgency=medium
+
+  * “avail” → “make available” (closes: #881343)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Sun, 14 Jan 2018 20:36:08 +0100
+
 pk4 (4) unstable; urgency=medium
 
   * pk4-replace.1: add another example to illustrate how options are passed
