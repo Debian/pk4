@@ -10,4 +10,5 @@ Here is a terminal screencast of the tool in action, making available the
 sources of i3, applying a patch, rebuilding the package and replacing the
 installed binary packages:
 
-[![asciicast](https://asciinema.org/a/TgYn2wkABiob14WKb2UefNl9f.png)](https://asciinema.org/a/TgYn2wkABiob14WKb2UefNl9f)
+[![asciicast](https://asciinema.org/a/251048.svg)](https://asciinema.org/a/251048)
+
